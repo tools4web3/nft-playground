@@ -76,7 +76,7 @@ function App() {
           : CurrencyAddress,
       StartedAt: parseInt(StartedAt),
       ExpiredAt: parseInt(ExpiredAt),
-      minSellerReceived: parseInt(minSellerReceived),
+      minSellerReceived: ethers.utils.parseUnits(minSellerReceived, priceDecimal),
       params: ethers.utils.keccak256(ethers.utils.toUtf8Bytes(params)),
     };
 
