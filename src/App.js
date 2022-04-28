@@ -77,7 +77,7 @@ function App() {
       StartedAt: parseInt(StartedAt),
       ExpiredAt: parseInt(ExpiredAt),
       minSellerReceived: parseInt(minSellerReceived),
-      params,
+      params: ethers.utils.keccak256(ethers.utils.toUtf8Bytes(params)),
     };
 
     const signer = await provider.getSigner();
@@ -85,7 +85,7 @@ function App() {
     const outputSignature = await signer._signTypedData(domain, types, value);
 
     setOutput(outputSignature);
-    setOutputTuple({ ...value, chainId: parseInt(chainId) });
+    setOutputTuple({ ...value, chainId: parseInt(chainId), params });
   }
 
   async function submit(e) {
