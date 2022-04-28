@@ -13,18 +13,19 @@ function App() {
   const [Nonce, setNonce] = useState("")
   const [CollectionAddress, setCollectionAddress] = useState("")
   const [TokenID, setTokenID] = useState("")
+  const [Amount, setAmount] = useState("")
   const [Price, setPrice] = useState("")
   const [CurrencyAddress, setCurrencyAddress] = useState("")
   const [StartedAt, setStartedAt] = useState("")
   const [ExpiredAt, setExpiredAt] = useState("")
   const [minSellerReceived, setminSellerReceived] = useState("")
-  const [signature, setsignature] = useState("")
 
   const [accounts, setAccounts] = useState(null)
   const [provider, setProvider] = useState(null)
   const [isLoggedIn, setIsloggedIn] = useState(false)
 
   const [output, setOutput] = useState("")
+  const [outputTuple, setOutputTuple] = useState({})
 
   const stringToBoolean = (string) => 
   string === 'false' || string === 'undefined' || string === 'null' || string === '0' ?
@@ -45,12 +46,12 @@ function App() {
         {name:"Nonce", type:"uint"},
         {name:"CollectionAddress", type:"address"},
         {name:"TokenID", type:"uint256"},
+        {name:"Amount", type:"uint256"},
         {name:"Price", type:"uint256"},
         {name:"CurrencyAddress", type:"address"},
         {name:"StartedAt", type:"uint256"},
         {name:"ExpiredAt", type:"uint256"},
         {name:"minSellerReceived", type:"uint"},
-        {name:"signature", type:"string"}
       ],
     }
 
@@ -60,12 +61,12 @@ function App() {
       Nonce: parseInt(Nonce),
       CollectionAddress,
       TokenID: parseInt(TokenID),
+      Amount: parseInt(Amount),
       Price: parseInt(Price),
       CurrencyAddress,
       StartedAt: parseInt(StartedAt),
       ExpiredAt: parseInt(ExpiredAt),
       minSellerReceived: parseInt(minSellerReceived),
-      signature,
     }
 
     const signer = await provider.getSigner()
@@ -73,6 +74,7 @@ function App() {
     const outputSignature = await signer._signTypedData(domain, types, value)
 
     setOutput(outputSignature)
+    setOutputTuple(value)
   }
 
   async function submit(e) {
@@ -138,16 +140,20 @@ function App() {
         <input type="text" placeholder="Nonce (uint)" value={Nonce} onChange={e => setNonce(e.target.value)} />
         <input type="text" placeholder="CollectionAddress (address, like 0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC)" value={CollectionAddress} onChange={e => setCollectionAddress(e.target.value)} />
         <input type="text" placeholder="TokenID (uint256)" value={TokenID} onChange={e => setTokenID(e.target.value)} />
+        <input type="text" placeholder="Amount (uint256)" value={Amount} onChange={e => setAmount(e.target.value)} />
         <input type="text" placeholder="Price (uint256)" value={Price} onChange={e => setPrice(e.target.value)} />
         <input type="text" placeholder="CurrencyAddress (address, like 0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC)" value={CurrencyAddress} onChange={e => setCurrencyAddress(e.target.value)} />
         <input type="text" placeholder="StartedAt (uint256)" value={StartedAt} onChange={e => setStartedAt(e.target.value)} />
         <input type="text" placeholder="ExpiredAt (uint256)" value={ExpiredAt} onChange={e => setExpiredAt(e.target.value)} />
         <input type="text" placeholder="minSellerReceived (uint)" value={minSellerReceived} onChange={e => setminSellerReceived(e.target.value)} />
-        <input type="text" placeholder="signature (string)" value={signature} onChange={e => setsignature(e.target.value)} />
         <br></br>
         <button type='submit' onClick={e => submit(e)}>Submit</button>
       </form>
       <h2>OUTPUT SIGNATURE: { output }</h2>
+      <h2>Tuple:</h2>
+      <pre>
+        {JSON.stringify(outputTuple)}
+      </pre>
     </div>
   );
 }
