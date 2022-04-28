@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/nft-playground/static/css/main.6c7d1c44.css",
-    "main.js": "/nft-playground/static/js/main.568cb4b4.js",
+    "main.js": "/nft-playground/static/js/main.04ac6b06.js",
     "static/js/787.a755745c.chunk.js": "/nft-playground/static/js/787.a755745c.chunk.js",
     "index.html": "/nft-playground/index.html",
     "main.6c7d1c44.css.map": "/nft-playground/static/css/main.6c7d1c44.css.map",
-    "main.568cb4b4.js.map": "/nft-playground/static/js/main.568cb4b4.js.map",
+    "main.04ac6b06.js.map": "/nft-playground/static/js/main.04ac6b06.js.map",
     "787.a755745c.chunk.js.map": "/nft-playground/static/js/787.a755745c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6c7d1c44.css",
-    "static/js/main.568cb4b4.js"
+    "static/js/main.04ac6b06.js"
   ]
 }
